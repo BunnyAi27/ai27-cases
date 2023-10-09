@@ -1,0 +1,111 @@
+Sample create case
+Input
+const input = { // CreateCaseRequest
+  domainId: "cad6a66d-fea8-4733-8089-b28313a4cca2", // required
+  templateId: "7f5f43ee-9f5c-4550-8b8c-a308264f3753", // required
+  fields: [ // FieldValueList // required
+    { // FieldValue
+      id: "customer_id", // required
+      value: { // FieldValueUnion Union: only one key present
+        stringValue: "arn:aws:profile:us-east-1:678201811383:domains/amazon-connect-ai-27-dev/profiles/45fbf14ab8c54c6296ca1617882021fe",
+        /*doubleValue: Number("double"),
+        booleanValue: true || false,
+        emptyValue: {},*/
+      },
+      
+    },
+    {
+      id: "title", // required
+      value: { // FieldValueUnion Union: only one key present
+        stringValue: "Test case",
+      },
+    }
+    
+  ],
+  //clientToken: "STRING_VALUE",
+};
+
+Output
+{
+  "$metadata": {
+    "httpStatusCode": 200,
+    "requestId": "d5e06cd5-eba1-4a81-a326-ccc7de65ae31",
+    "attempts": 1,
+    "totalRetryDelay": 0
+  },
+  "caseArn": "arn:aws:cases:us-east-1:678201811383:domain/cad6a66d-fea8-4733-8089-b28313a4cca2/case/151dcdcc-e754-399a-97cd-44721e53277b",
+  "caseId": "151dcdcc-e754-399a-97cd-44721e53277b"
+}
+
+Sample get case
+Input
+const Getinput = { // GetCaseRequest
+caseId: "151dcdcc-e754-399a-97cd-44721e53277b", // required
+domainId: "cad6a66d-fea8-4733-8089-b28313a4cca2", // required
+fields: [ // FieldIdentifierList // required
+  { // FieldIdentifier
+    id: "title", // required
+  },
+   { // FieldIdentifier
+    id: "customer_id", // required
+  },
+],
+//nextToken: "STRING_VALUE",
+};
+
+Response:
+{
+    "$metadata": {
+      "httpStatusCode": 200,
+      "requestId": "d1f88d43-4050-4922-8f44-ba363635ff87",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "fields": [
+      {
+        "id": "title",
+        "value": {
+          "stringValue": "Test case"
+        }
+      },
+      {
+        "id": "customer_id",
+        "value": {
+          "stringValue": "arn:aws:profile:us-east-1:678201811383:domains/amazon-connect-ai-27-dev/profiles/45fbf14ab8c54c6296ca1617882021fe"
+        }
+      }
+    ],
+    "tags": {},
+    "templateId": "7f5f43ee-9f5c-4550-8b8c-a308264f3753"
+  }
+  
+
+Sample update case
+Input
+const Updateinput = { // UpdateCaseRequest
+  domainId: "cad6a66d-fea8-4733-8089-b28313a4cca2", // required
+  caseId: "151dcdcc-e754-399a-97cd-44721e53277b", // required
+  fields: [ // FieldValueList // required
+    { // FieldValue
+      id: "title", // required
+      value: { // FieldValueUnion Union: only one key present
+        stringValue: "Updated Case ",
+        /*doubleValue: Number("double"),
+        booleanValue: true || false,
+        emptyValue: {},*/
+      },
+    },
+  ],
+};
+
+Response:
+{
+    '$metadata': {
+      httpStatusCode: 200,
+      requestId: '62f6d342-cbd5-4eab-b34b-56778a463b45',
+      extendedRequestId: undefined,
+      cfId: undefined,
+      attempts: 1,
+      totalRetryDelay: 0
+    }
+  }
