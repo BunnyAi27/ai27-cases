@@ -1,4 +1,4 @@
-import { ConnectCasesClient, CreateCaseCommand, GetCaseCommand, UpdateCaseCommand } from "@aws-sdk/client-connectcases";
+const { ConnectCasesClient, CreateCaseCommand, GetCaseCommand, UpdateCaseCommand } = require("@aws-sdk/client-connectcases")
 const client = new ConnectCasesClient();
 const responseBuilder = require("./responseBuilder");
 
