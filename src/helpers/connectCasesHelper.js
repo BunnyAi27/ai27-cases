@@ -1,5 +1,6 @@
 const { ConnectCasesClient, CreateCaseCommand, GetCaseCommand, UpdateCaseCommand } = require("@aws-sdk/client-connectcases")
 const client = new ConnectCasesClient();
+const parameterBuilder = require("./connectParameterBuilder");
 const responseBuilder = require("./responseBuilder");
 
 const connectCaseAction = async (event, tenantConfig) => {
@@ -25,10 +26,10 @@ const connectCaseAction = async (event, tenantConfig) => {
 
       case "/updateCase":
         try {
-          console.info("Delete Params: ", eventBody);
+          console.info("Update Params: ", eventBody);
           command = new UpdateCaseCommand(eventBody);
           response = await client.send(command);
-          console.info("Delete response: ", response);
+          console.info("Update response: ", response);
           return responseBuilder.formatResponse(event, 200, response);
         } catch (error) {
           console.error("Update response: ", error);

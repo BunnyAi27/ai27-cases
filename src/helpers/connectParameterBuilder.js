@@ -1,189 +1,82 @@
-const deleteParamaterBuilder = (eventBody) => {
-    const input = { // DeleteProfileRequest
-        ProfileId: "STRING_VALUE", // required
-        DomainName: "STRING_VALUE", // required
-      }
-    return input;
+const createParameterBuilder = (eventBody, tenantConfig) => {
+  const input = {
+    // CreateCaseRequest
+    domainId: tenantConfig.Item.casesDomainId, //"cad6a66d-fea8-4733-8089-b28313a4cca2", // required
+    templateId: "7f5f43ee-9f5c-4550-8b8c-a308264f3753", // required
+    fields: [
+      // FieldValueList // required
+      {
+        // FieldValue
+        id: "customer_id", // required
+        value: {
+          // FieldValueUnion Union: only one key present
+          stringValue: tenantConfig.Item.casesCustomerIdArn+eventBody.customerId
+            //"arn:aws:profile:us-east-1:678201811383:domains/amazon-connect-ai-27-dev/profiles/45fbf14ab8c54c6296ca1617882021fe",
+          /*doubleValue: Number("double"),
+            booleanValue: true || false,
+            emptyValue: {},*/
+        },
+      },
+      {
+        id: "title", // required
+        value: {
+          // FieldValueUnion Union: only one key present
+          stringValue: eventBody.title,
+        },
+      },
+    ],
+    //clientToken: "STRING_VALUE",
+  };
+  return input;
+};
+
+const getParameterBuilder = (eventBody, tenantConfig) => {
+  const input = {
+    // GetCaseRequest
+    caseId: eventBody.caseId, //"151dcdcc-e754-399a-97cd-44721e53277b", // required
+    domainId: tenantConfig.Item.casesDomainId, // required
+    fields: [
+      // FieldIdentifierList // required
+      {
+        // FieldIdentifier
+        id: "title", // required
+      },
+      {
+        // FieldIdentifier
+        id: "customer_id", // required
+      },
+    ],
+    //nextToken: "STRING_VALUE",
   };
 
-  const createParamaterBuilder = (eventBody) => {
-    const input = { // CreateProfileRequest
-        DomainName: "STRING_VALUE", // required
-        AccountNumber: "STRING_VALUE",
-        AdditionalInformation: "STRING_VALUE",
-        PartyType: "INDIVIDUAL" || "BUSINESS" || "OTHER",
-        BusinessName: "STRING_VALUE",
-        FirstName: "STRING_VALUE",
-        MiddleName: "STRING_VALUE",
-        LastName: "STRING_VALUE",
-        BirthDate: "STRING_VALUE",
-        Gender: "MALE" || "FEMALE" || "UNSPECIFIED",
-        PhoneNumber: "STRING_VALUE",
-        MobilePhoneNumber: "STRING_VALUE",
-        HomePhoneNumber: "STRING_VALUE",
-        BusinessPhoneNumber: "STRING_VALUE",
-        EmailAddress: "STRING_VALUE",
-        PersonalEmailAddress: "STRING_VALUE",
-        BusinessEmailAddress: "STRING_VALUE",
-        Address: { // Address
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        ShippingAddress: {
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        MailingAddress: {
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        BillingAddress: {
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        Attributes: { // Attributes
-          "<keys>": "STRING_VALUE",
-        },
-        PartyTypeString: "STRING_VALUE",
-        GenderString: "STRING_VALUE",
-    }
-    return input;   
-  };
+  return formattedresponse;
+};
 
-  const searchParamaterBuilder = (eventBody) => {
-    const input = { // SearchProfilesRequest
-        NextToken: "STRING_VALUE",
-        MaxResults: Number("int"),
-        DomainName: "STRING_VALUE", // required
-        KeyName: "STRING_VALUE", // required
-        Values: [ // requestValueList // required
-          "STRING_VALUE",
-        ],
-        AdditionalSearchKeys: [ // additionalSearchKeysList
-          { // AdditionalSearchKey
-            KeyName: "STRING_VALUE", // required
-            Values: [ // required
-              "STRING_VALUE",
-            ],
-          },
-        ],
-        LogicalOperator: "AND" || "OR",
-      }
-    return formattedresponse;   
+const updateParameterBuilder = (eventBody, tenantConfig) => {
+  const input = {
+    // UpdateCaseRequest
+    domainId: tenantConfig.Item.casesDomainId, // required
+    caseId: eventBody.caseId, // required
+    fields: [
+      // FieldValueList // required
+      {
+        // FieldValue
+        id: "title", // required
+        value: {
+          // FieldValueUnion Union: only one key present
+          stringValue: "Updated Case ",
+          /*doubleValue: Number("double"),
+        booleanValue: true || false,
+        emptyValue: {},*/
+        },
+      },
+    ],
   };
+  return formattedresponse;
+};
 
-  const updateParamaterBuilder = (eventBody) => {
-    const input = { // UpdateProfileRequest
-        DomainName: "STRING_VALUE", // required
-        ProfileId: "STRING_VALUE", // required
-        AdditionalInformation: "STRING_VALUE",
-        AccountNumber: "STRING_VALUE",
-        PartyType: "INDIVIDUAL" || "BUSINESS" || "OTHER",
-        BusinessName: "STRING_VALUE",
-        FirstName: "STRING_VALUE",
-        MiddleName: "STRING_VALUE",
-        LastName: "STRING_VALUE",
-        BirthDate: "STRING_VALUE",
-        Gender: "MALE" || "FEMALE" || "UNSPECIFIED",
-        PhoneNumber: "STRING_VALUE",
-        MobilePhoneNumber: "STRING_VALUE",
-        HomePhoneNumber: "STRING_VALUE",
-        BusinessPhoneNumber: "STRING_VALUE",
-        EmailAddress: "STRING_VALUE",
-        PersonalEmailAddress: "STRING_VALUE",
-        BusinessEmailAddress: "STRING_VALUE",
-        Address: { // UpdateAddress
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        ShippingAddress: {
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        MailingAddress: {
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        BillingAddress: {
-          Address1: "STRING_VALUE",
-          Address2: "STRING_VALUE",
-          Address3: "STRING_VALUE",
-          Address4: "STRING_VALUE",
-          City: "STRING_VALUE",
-          County: "STRING_VALUE",
-          State: "STRING_VALUE",
-          Province: "STRING_VALUE",
-          Country: "STRING_VALUE",
-          PostalCode: "STRING_VALUE",
-        },
-        Attributes: { // UpdateAttributes
-          "<keys>": "STRING_VALUE",
-        },
-        PartyTypeString: "STRING_VALUE",
-        GenderString: "STRING_VALUE",
-      };
-    return formattedresponse;   
-  };
-  
-  module.exports = {
-    createParamaterBuilder,deleteParamaterBuilder, searchParamaterBuilder, updateParamaterBuilder
-  };
-  
-  
-  
+module.exports = {
+  createParameterBuilder,
+  getParameterBuilder,
+  updateParameterBuilder,
+};
