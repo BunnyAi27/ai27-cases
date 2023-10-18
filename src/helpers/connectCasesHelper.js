@@ -1,11 +1,11 @@
 const { ConnectCasesClient, CreateCaseCommand, GetCaseCommand, UpdateCaseCommand } = require("@aws-sdk/client-connectcases")
 const client = new ConnectCasesClient();
+const parameterBuilder = require("./connectParameterBuilder");
 const responseBuilder = require("./responseBuilder");
 
 const connectCaseAction = async (event, tenantConfig) => {
   let response = "";
   let command = "";
-  let params = "";
   const eventBody = JSON.parse(event.body);
 
   console.info("Params: ", eventBody);
@@ -13,8 +13,9 @@ const connectCaseAction = async (event, tenantConfig) => {
     switch (event.resource) {
       case "/createCase":
         try {
-          console.info("Create Params: ", eventBody);
-          command = new CreateCaseCommand(eventBody);
+          const createParams = parameterBuilder.createParameterBuilder(eventBody, tenantConfig);
+          console.info("Create Params: ", JSON.stringify(createParams));
+          command = new CreateCaseCommand(createParams);
           response = await client.send(command);
           console.info("Create response: ", response);
           return responseBuilder.formatResponse(event, 200, response);
@@ -25,10 +26,11 @@ const connectCaseAction = async (event, tenantConfig) => {
 
       case "/updateCase":
         try {
-          console.info("Delete Params: ", eventBody);
-          command = new UpdateCaseCommand(eventBody);
+          const updateParams = parameterBuilder.updateParameterBuilder(eventBody, tenantConfig);
+          console.info("Update Params: ", JSON.stringify(updateParams));
+          command = new UpdateCaseCommand(updateParams);
           response = await client.send(command);
-          console.info("Delete response: ", response);
+          console.info("Update response: ", response);
           return responseBuilder.formatResponse(event, 200, response);
         } catch (error) {
           console.error("Update response: ", error);
@@ -37,8 +39,9 @@ const connectCaseAction = async (event, tenantConfig) => {
 
       case "/getCase":
         try {
-          console.info("Get Params: ", eventBody);
-          command = new GetCaseCommand(eventBody);
+          const getParams = parameterBuilder.getParameterBuilder(eventBody, tenantConfig);
+          console.info("Get Params: ", JSON.stringify(getParams));
+          command = new GetCaseCommand(getParams);
           response = await client.send(command);
           console.info("Get response: ", response);
           return responseBuilder.formatResponse(event, 200, response);

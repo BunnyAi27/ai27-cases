@@ -109,3 +109,49 @@ Response:
       totalRetryDelay: 0
     }
   }
+
+
+  Case list:
+1.
+  "caseArn": "arn:aws:cases:us-east-1:678201811383:domain/cad6a66d-fea8-4733-8089-b28313a4cca2/case/bd9672a3-b276-3638-b6a3-4808a31d684f",
+  "caseId": "bd9672a3-b276-3638-b6a3-4808a31d684f"
+
+2.
+"caseArn": "arn:aws:cases:us-east-1:678201811383:domain/cad6a66d-fea8-4733-8089-b28313a4cca2/case/151dcdcc-e754-399a-97cd-44721e53277b",
+  "caseId": "151dcdcc-e754-399a-97cd-44721e53277b"
+
+
+
+
+
+
+
+
+
+
+  {
+    "ProfileId": "d690099ec0a14bd29edda6b83b6dae18",
+    "DomainName": "amazon-connect-ai-27-dev",
+    "AccountNumber": "ACCT12347",
+    "BusinessName": "DogShow",
+    "FirstName": "Johnie",
+    "MiddleName": "Dogoon",
+    "LastName": "Morie",
+    "BirthDate": "1990-04-18",
+    "Gender": "MALE",
+    "Address": {
+        "Address1": "9934 Sample St",
+        "Address2": "Apt 8",
+        "Address3": "null",
+        "Address4": "null",
+        "City": "Seattle",
+        "Country": "USA",
+        "County": "King",
+        "PostalCode": "98011",
+        "State": "WA"
+    },
+    "Attributes": {
+        "SSN": "123-44-3783",
+        "LoyaltyPoints": "8000"
+    }
+} 
