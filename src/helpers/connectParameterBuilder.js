@@ -1,4 +1,16 @@
 const createParameterBuilder = (eventBody, tenantConfig) => {
+  function addTenantArnIfPresent(eventBody, tenantConfig) {
+    const fields = eventBody.fields;
+    const tenantArn = tenantConfig.Item.casesTenantArn;
+    const customerField = fields.find(field => field.id === "customer_id");
+  
+    if (customerField) {
+      customerField.value.tenantArn = tenantArn + customerField.value.stringValue;
+    }
+  }
+  console.info("customerField Params: ", customerField);
+  addTenantArnIfPresent(eventBody, tenantConfig);
+
   const createParams = {
     // CreateCaseRequest
     domainId: tenantConfig.Item.casesDomainId, //"cad6a66d-fea8-4733-8089-b28313a4cca2", // required
@@ -28,6 +40,8 @@ const createParameterBuilder = (eventBody, tenantConfig) => {
     // ],
     //clientToken: "STRING_VALUE",
   };
+  
+
   return createParams;
 };
 

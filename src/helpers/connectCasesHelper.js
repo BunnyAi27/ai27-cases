@@ -14,7 +14,7 @@ const connectCaseAction = async (event, tenantConfig) => {
       case "/createCase":
         try {
           const createParams = parameterBuilder.createParameterBuilder(eventBody, tenantConfig);
-          console.info("Create Params: ", createParams);
+          console.info("Create Params: ", JSON.stringify(createParams));
           command = new CreateCaseCommand(createParams);
           response = await client.send(command);
           console.info("Create response: ", response);
@@ -27,7 +27,7 @@ const connectCaseAction = async (event, tenantConfig) => {
       case "/updateCase":
         try {
           const updateParams = parameterBuilder.updateParameterBuilder(eventBody, tenantConfig);
-          console.info("Update Params: ", updateParams);
+          console.info("Update Params: ", JSON.stringify(updateParams));
           command = new UpdateCaseCommand(updateParams);
           response = await client.send(command);
           console.info("Update response: ", response);
@@ -40,7 +40,7 @@ const connectCaseAction = async (event, tenantConfig) => {
       case "/getCase":
         try {
           const getParams = parameterBuilder.getParameterBuilder(eventBody, tenantConfig);
-          console.info("Get Params: ", getParams);
+          console.info("Get Params: ", JSON.stringify(getParams));
           command = new GetCaseCommand(getParams);
           response = await client.send(command);
           console.info("Get response: ", response);
