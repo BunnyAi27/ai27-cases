@@ -67,7 +67,7 @@
       "authScopeCreate":"cases/create",
       "authScopeUpdate":"cases/update",
       "authScopeSearch":"cases/get",
-      "tenantConfigTableName": "ai27-dev-customerProfile"
+      "tenantConfigTableName": "ai27-dev-tenantInformation"
     },
     "sit": {},
     "prd": {}
