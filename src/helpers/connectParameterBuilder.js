@@ -43,8 +43,31 @@ const updateParameterBuilder = (eventBody, tenantConfig) => {
   return updateParams;
 };
 
+const listCaseParameterBuilder = (eventBody, tenantConfig, nextToken) => {
+  const listCaseParams = { // ListCasesForContactRequest
+    domainId: tenantConfig.Item.casesDomainId, // required
+    contactArn: tenantConfig.Item.connectInstanceARN + eventBody.contactId, // required
+    maxResults: 10,
+    nextToken: nextToken || "",
+  };
+  return listCaseParams;
+};
+
+const listTemplateParameterBuilder = (eventBody, tenantConfig) => {
+  const listTemplateParams = { // ListTemplatesRequest
+    domainId: tenantConfig.Item.casesDomainId, // required
+    maxResults: 100,
+    status: [ // TemplateStatusFilters
+      eventBody.templateStatus || "Active",
+    ],
+  };
+  return listTemplateParams;
+};
+
 module.exports = {
   createParameterBuilder,
   getParameterBuilder,
   updateParameterBuilder,
+  listCaseParameterBuilder,
+  listTemplateParameterBuilder
 };

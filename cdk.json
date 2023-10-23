@@ -67,6 +67,8 @@
       "authScopeCreate":"cases/create",
       "authScopeUpdate":"cases/update",
       "authScopeSearch":"cases/get",
+      "authScopeListCase": "cases/listCase",
+      "authScopeListTemplate": "cases/listTemplate",
       "tenantConfigTableName": "ai27-dev-tenantInformation"
     },
     "sit": {},
