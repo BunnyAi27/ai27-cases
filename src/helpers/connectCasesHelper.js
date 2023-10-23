@@ -2,18 +2,22 @@ const { ConnectCasesClient, CreateCaseCommand, GetCaseCommand, UpdateCaseCommand
 const client = new ConnectCasesClient();
 const parameterBuilder = require("./connectParameterBuilder");
 const responseBuilder = require("./responseBuilder");
+const { getTemplateInfo } = require("./caseTemplateLookUp");
 
 const connectCaseAction = async (event, tenantConfig) => {
   let response = "";
   let command = "";
   const eventBody = JSON.parse(event.body);
+  let templateName = eventBody.templateName;
 
   console.info("Params: ", eventBody);
   try {
     switch (event.resource) {
       case "/createCase":
         try {
-          const createParams = parameterBuilder.createParameterBuilder(eventBody, tenantConfig);
+          const templateInfo = await getTemplateInfo(templateName);
+          console.info("Template Info lookup : ", JSON.stringify(templateInfo));
+          const createParams = parameterBuilder.createParameterBuilder(eventBody, tenantConfig, templateInfo);
           console.info("Create Params: ", JSON.stringify(createParams));
           command = new CreateCaseCommand(createParams);
           response = await client.send(command);
